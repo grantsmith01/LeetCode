@@ -1,0 +1,22 @@
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        
+        """
+        Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+        You may assume that each input would have exactly one solution, and you may not use the same element twice.
+        You can return the answer in any order.
+        """
+        
+        hashMap = {} #value will be key, index will be value! can find value easily
+        for i in range(len(nums)): #loop through entire nums array
+            complement = target - nums[i] #the value to be added to i to make target
+            if complement in hashMap: #check for complement value using hashing(key)
+                return [i, hashMap[complement]] #return i (index) and the complement 
+            hashMap[nums[i]] = i #insert key and value after to avoid using same index (4 + 4 = 8)
+            
+                
