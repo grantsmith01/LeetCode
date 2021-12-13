@@ -1,0 +1,51 @@
+class Solution(object):
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        """#This solution is "too long"
+        hashMap = {}
+        solArr = []
+        for i in range(len(nums)):
+            hashMap[nums[i]] = i
+            
+        for i in range(len(nums)): #first number to be used for finding complement
+            for j in range(i+1, len(nums)): #second to be used for finding complement. going through all possible combinations without using self again
+                complement = 0 - nums[i] - nums[j] #if i is -1 and j is 1, our complement would be 0. 
+                if complement in hashMap and hashMap[complement] != i and hashMap[complement] != j:
+                    newSol = [nums[i], nums[j], complement]
+                    newSol.sort()
+                    if newSol not in solArr:
+                        solArr.append(newSol)
+        return solArr
+        """ 
+        
+        nums.sort() #sort so they're in ascending order
+        solution = []
+        #The idea here is to use i as a reference and then have two more indices, right and left. 
+        #Add the three numbers. If it is too low, move the left index forward, to a higher number (since it is sorted). 
+        #If it is too high, move the right index backwards, to a lower number. If it equals 0, add it. If left and right meet, move i 
+        for i in range(len(nums)-2): #length-2 because that would be the last 3 numbers being summed
+            if nums[i] > 0: #if our nums[i] becomes positive, then it would only be summing positives, so break
+                break
+            left = i+1 
+            right = len(nums)-1
+            while right > left:
+                summ = nums[i] + nums[left] + nums[right]
+                if summ > 0:
+                    right -= 1
+                elif summ < 0:
+                    left += 1
+                else:
+                    sol = [nums[i], nums[left], nums[right]]
+                    if sol not in solution:
+                        solution.append(sol)
+                    while right > left and nums[left] == nums[left+1]: #skip through all repeat values for left
+                        left += 1
+                    while right > left and nums[right] == nums[right-1]: #skip through all repeat values for right
+                        right -= 1
+                    left += 1 #since we already added them, skip these values of left and right. otherwise we will reach overflow
+                    right -= 1
+        return solution
+            
