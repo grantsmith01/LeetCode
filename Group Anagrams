@@ -1,0 +1,46 @@
+class Solution(object):
+    def groupAnagrams(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        
+        hashMap = {}
+        for string in strs:
+            key = "".join(sorted(string)) #create a key out of the sorted current string
+            if key not in hashMap: #if this key isn't already in the hashMap...
+                hashMap[key] = [string] #assign the key the value of the string
+            else: #if this key IS in the hashMap...
+                hashMap[key] += [string] #add the string to the key as a list element
+        
+        return hashMap.values() #return just the values of the hashMap. values() returns a list of hashMap values, which are lists
+        
+        
+        """OLD SOLUTION
+        Make a copy list and sort the words in that list alphabetically. Then, create a hashMap with the sorted words as keys and their indices as values.
+        For the duplicate keys, aka the anagrams, add their index to a list. You will end up with a hashMap where you can look up a word and find
+        the indices of all its anagrams.
+      
+        copy = []
+        for i in strs:
+            copy.append(i)
+        hashMap = {} #Hashmap of letter sorted strings. the anagram string is the key, index is the value
+        for i in range(len(copy)): #make a copy list and sort every word alphabetically so the anagrams are identical. word indices still same as strs
+            letters = sorted(copy[i])
+            copy[i] = "".join(letters)
+            if copy[i] in hashMap.keys(): #if that anagram is already in hashMap, add its index to the lsit
+                hashMap[copy[i]].append(i)
+            else: #otherwise, create a new list with that index as its first element
+                hashMap[copy[i]] = [i]    
+        
+        Loop through all keys in hashMap. Add the strs values at the index of the key-value pair to the anagrams list, then add that list to the solution
+        
+        for key in hashMap:
+            anagrams = []
+            for j in hashMap[key]: #run through the indices of this word's anagrams
+                anagrams.append(strs[j])
+            solution.append(anagrams) #add that list of anagrams to the solution list
+        
+        return solution
+        """
+        
