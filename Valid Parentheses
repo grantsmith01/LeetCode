@@ -1,0 +1,26 @@
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        status = [0] * len(s) #0 means open, 1 means closed
+        openStack = [] #a stack of all open parentheses
+        for char in range(len(s)):
+            if s[char] == '}' or s[char] == ']' or s[char] == ')':
+                status[char] = 1 #change status to closed
+            
+            if status[char] == 0: #if the current char is an open paren...
+                openStack.append(s[char]) #add it onto the top of the stack
+            else: #if the current char is a closed paren...
+                if len(openStack) == 0: #if there ARE no open parentheses, just return false
+                    return False
+                elif s[char] == ')' and openStack.pop() != '(': #if the current closing paren doesn't match the last open paren, return false
+                    return False
+                elif s[char] == ']' and openStack.pop() != '[':
+                    return False
+                elif s[char] == '}' and openStack.pop() != '{':
+                    return False
+        if status.count(0) != status.count(1): #if the opens and closes don't add up, return false
+            return False
+        return True
