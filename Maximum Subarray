@@ -1,0 +1,14 @@
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        currSum = maxSum = nums[0] #set to first element
+        for i in range(1, len(nums)): #iterate after first element
+            currSum = max(nums[i], currSum + nums[i]) #determine if current element or running sum + that element is more. 
+            maxSum = max(currSum, maxSum) #if a good maxSum was set, it won't be overwritten by a lower one. if a new currSum is better, overwrite.
+
+        return maxSum
+                
+            
