@@ -1,0 +1,8 @@
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:    
+        hashMap = {} #hashmap key is the value of that index, hashmap value is the index
+        for i in range(len(nums)):
+            complement = target - nums[i] #find the complement of target and current index
+            if complement in hashMap: #if that complement is already a key in the hashmap
+                return [hashMap[complement], i] #return current index and its complement's index
+            hashMap[nums[i]] = i #store current index with value as key, to be searched in future as a complement
