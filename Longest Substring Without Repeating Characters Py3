@@ -1,0 +1,24 @@
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        right = 0 #indicators for sliding window
+        left = 0
+        char = [0] * 128 #array to keep track number of all possible characters
+        ans = 0 #the current longest substring length
+        
+        while right < len(s): #while the right side of the sliding window is within the string...
+            r = s[right] #assign the current right letter to r
+            char[ord(r)] += 1 #update the character array
+            
+            while char[ord(r)] > 1: #while there are still more than 1 of the right character...
+                l = s[left] #asign the current left letter to l
+                char[ord(l)] -= 1 #decrement the number of left characters
+                left += 1 #slide left over by 1
+                  
+            ans = max(ans, right - left + 1) #assign sub to previous value of sub or new sub length
+            right += 1 #slide right indicator to the right
+            
+        return ans
