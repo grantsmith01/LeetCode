@@ -13,6 +13,10 @@ Input: 8
 Output: 2
 
 Explanation: square root of 8 is 2.83..., return integer part 2
+
+NOTES
+- This is another example of finding the boundary of a certain condition. Here, the condition is mid^2 <= n. We want to find the last value of mid that
+  satisfies this condition, since anything over wouldn't qualify. Find boundary, erorr on left side since we're truncating decimals of real square root
 '''
 
 def square_root(n: int) -> int:
