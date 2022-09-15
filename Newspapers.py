@@ -7,7 +7,8 @@
   setting minimum as left flag and maximum as right flag.
 - We want to test mid values, checking if they're even enough time for the designated number of coworkers
   to get through the newspapers. This is the condition that sets array to left side false, right side true.
-- 
+- TIME COMPLEXITY: O(n log(n)). This is because the Binary Search is O(log(n)), and it takes O(n) each time to
+  search through the array to find out if the current given time works for the coworkers.
 '''
 
 def newspapers_split(newspapers_read_times: List[int], num_coworkers: int) -> int:
