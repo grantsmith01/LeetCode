@@ -5,6 +5,8 @@ INSTRUCTIONS
 Max depth of a binary tree is the longest root-to-leaf path. Given a binary tree, find its max depth.
 
 NOTES
+- RETURN VALUE: Max depth of current node's subtree, plus myself.
+- STATES: Only need depth of current node's children.
 - Root alone is depth 1
 - From the perspective of each node: return 1 + greatest depth of either child, 1 accounting for my depth + my longest child's.
 - Null nodes return 0 since they aren't a node at all, therefore add no depth.
